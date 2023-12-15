@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  nextjs:
+    build:
+      context: ./nextjs
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./nextjs:/app
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - nextjs
